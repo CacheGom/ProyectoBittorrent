@@ -87,6 +87,17 @@ Reemplaza `<nombre_libreria>` con cada una de las librerías mencionadas anterio
 - **Compartir Archivo**: El tracker imprime un mensaje cuando un peer comparte un archivo especificando qué archivo fue compartido y por quién.
 - **Descargar Archivo**: Similarmente, el tracker registra cuando un peer descarga un archivo, mostrando el nombre del archivo y el peer que lo descargó.
 - **Enviar Mensaje**: Cada mensaje enviado por un peer a través del tracker se muestra en la consola del tracker junto con la identificación del peer emisor.
+- 
+### Transferencia de Archivos, Recuperación de Estados y Visualización del Estado de la Red
+
+#### Transferencia de Archivos
+La transferencia de archivos se realiza de manera distribuida entre los peers, permitiendo descargas simultáneas desde múltiples fuentes para mejorar la eficiencia y velocidad de descarga.
+
+#### Recuperación de Estados
+Se utiliza un archivo JSON (`download_status.json`) para mantener el estado de las descargas. Esto permite a los peers reconectar y reanudar las descargas interrumpidas desde el punto en que se detuvieron.
+
+#### Visualización del Estado de la Red
+La consola del tracker proporciona una visión detallada de la actividad en la red. Registra acciones como la conexión y desconexión de peers, compartición y descarga de archivos, y el envío de mensajes entre peers. Esto permite una supervisión efectiva y en tiempo real del estado y las interacciones dentro de la red de peers.
 
 ### Estructura del Proyecto
 
