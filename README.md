@@ -110,4 +110,35 @@ La consola del tracker proporciona una visión detallada de la actividad en la r
 - Asegúrate de que todos los peers y el tracker estén conectados a la misma red virtual (por ejemplo, Hamachi) para la comunicación efectiva.
 - Personaliza los archivos compartidos y las configuraciones de red según tus necesidades específicas.
 
-¡Disfruta explorando y experimentando con tu implementación de BitTorrent!
+### Estrategia de Distribución
+
+#### Distribución y Compartición de Archivos
+
+En esta implementación de BitTorrent, los archivos se distribuyen entre los nodos (peers) de la red de la siguiente manera:
+
+- **Tracker Centralizado**: El tracker centralizado actúa como intermediario entre los peers. Permite a los peers registrarse, compartir la disponibilidad de archivos y coordinar las descargas.
+  
+- **Descubrimiento de Peers**: Cuando un peer desea descargar un archivo específico, consulta al tracker para obtener una lista de peers que tienen ese archivo disponible.
+  
+- **Descarga desde Múltiples Fuentes**: La descarga se realiza desde múltiples peers simultáneamente (técnicas de descarga distribuida). Esto mejora la velocidad y eficiencia de la transferencia de archivos, minimizando la carga en cualquier peer individual.
+
+#### Decisiones de Diseño para Garantizar Transparencia, Robustez y Concurrencia
+
+Para asegurar la transparencia, robustez y concurrencia en la red BitTorrent, se han tomado las siguientes decisiones de diseño:
+
+- **Transparencia**: La comunicación entre los peers y el tracker se realiza a través de un protocolo estándar, permitiendo una interacción clara y sin ambigüedades. Cada acción realizada por un peer se registra y se muestra en la consola del tracker, proporcionando visibilidad sobre las operaciones de la red.
+  
+- **Robustez**: Se implementa un mecanismo de recuperación de estado utilizando archivos JSON (`download_status.json`). Esto permite a los peers reconectar y reanudar las descargas interrumpidas sin pérdida de datos ni duplicación de esfuerzos.
+  
+- **Concurrencia**: El uso de hilos en Python (`threading`) permite que múltiples peers puedan realizar acciones concurrentemente, como la descarga y compartición de archivos, sin interferir unos con otros. Esto optimiza el uso de recursos y mejora la respuesta y rendimiento del sistema.
+
+#### Recuperación de Comunicación y Estado Después de Desconexiones
+
+La recuperación de la comunicación y el estado después de desconexiones se gestiona de la siguiente manera:
+
+- **Persistencia del Estado**: Cada peer mantiene un archivo `download_status.json` que guarda el estado de las descargas en curso. Si un peer se desconecta y luego se reconecta, consulta este archivo para determinar qué archivos estaban en proceso de descarga y continúa desde donde se detuvo.
+  
+- **Reconexión Automática**: Los peers están diseñados para reconectarse automáticamente al tracker y a otros peers después de una desconexión no intencional. Esto garantiza que las descargas en curso y la participación en la red se reanuden sin intervención manual.
+
+Esta estrategia y diseño aseguran una red BitTorrent eficiente, resistente y fácil de usar para la compartición de archivos entre múltiples nodos.
+
